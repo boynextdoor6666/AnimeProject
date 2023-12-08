@@ -3,14 +3,17 @@ body {
 }
 
 
+
 aside {
-    float: left;
-    background-color: #F0E68C;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
     width: 10%;
     padding: 0.5%;
     height: 100vh;
     border-right: 1px solid #4d4d4d;
 }
+
 
 aside .logo{
     font-size: 40px;
@@ -67,7 +70,7 @@ p#third {
     transform: translate(320px, -80px)
 }
 
-img#pic
+img#pic {
     height: 180px;
     width: 320px;
 }
@@ -76,4 +79,7 @@ h2#first {
     transform: translate(320px, -70px)
 }
 
+li {
+ font-size: 50px
+}
 

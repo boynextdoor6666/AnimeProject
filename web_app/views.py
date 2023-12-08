@@ -8,3 +8,6 @@ def plot(request):
 
 def characters(request):
     return render (request, 'web_app/characters.html')
+
+def chat(request):
+    return render (request, 'web_app/chat.html')
