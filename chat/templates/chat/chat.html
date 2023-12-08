@@ -1,0 +1,48 @@
+<!-- chat/templates/chat/chat.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Chat</h1>
+
+    <div id="chat-messages">
+        {% for message in messages %}
+            <p>{{ message.user.username }}: {{ message.content }}</p>
+        {% endfor %}
+    </div>
+
+    <form id="message-form" method="post" action="{% url 'chat' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        // Обновление чата через AJAX
+        function updateChat() {
+            $.get("{% url 'chat' %}", function(data) {
+                $("#chat-messages").html(data);
+            });
+        }
+
+        // Обновление каждые 5 секунд (можете настроить по своему усмотрению)
+        setInterval(updateChat, 5000);
+
+        // Отправка формы через AJAX
+        $("#message-form").submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'chat' %}",
+                data: $("#message-form").serialize(),
+                success: function(data) {
+                    updateChat();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
